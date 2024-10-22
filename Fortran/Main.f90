@@ -2064,7 +2064,7 @@ contains
 
         !escribimos sobre el archivo de errores
         do i = 1, self%numero_errores
-            write(unidad, '(A , A)') 'tipo:',self%erroresSintacticos(i)%tipo
+            write(unidad, '(A , A)') 'Tipo:',trim(self%erroresSintacticos(i)%tipo)
             write(unidad, '(A , A)') 'linea:',char(self%erroresSintacticos(i)%linea)
         end do
         close(unidad)
@@ -2104,7 +2104,7 @@ contains
         call actualizarMainPage(self)
         i = 1
         ! Abrir el archivo HTML para escritura
-        open(unit = unidad, file = 'entrada.txt', status = 'replace')
+        open(unit = unidad, file = 'C:\Users\cesar\OneDrive\Documentos\Fortran\Proyecto 2\pagina.html', status = 'replace')
     
         ! Escribir el encabezado del HTML
         write(unidad, *) '<html>'
@@ -2112,12 +2112,12 @@ contains
         write(unidad, *) '<body>'
         !agregamos las variables
         do while(i <= self%main_page%numero_contenedores_pagina)
-            write(unidad, *) '<div id = "',self%main_page%contenedores_pag(i)%nombre,'">'
+            write(unidad, *) '<div id = "'//trim(self%main_page%contenedores_pag(i)%nombre)//'">'
             !verificamos que ese contenedor no tenga botones, textos, etc, si tiene, los agregamos
             if (allocated(self%main_page%contenedores_pag(i)%contenedores_contenedor)) then
                 j = 1
                 do while (j <= self%main_page%contenedores_pag(i)%num_contenedores_cont)
-                    write(unidad, *) '<div id = "',self%main_page%contenedores_pag(i)%contenedores_contenedor(j)%nombre,'">'
+                    write(unidad, *) '<div id = "'//trim(self%main_page%contenedores_pag(i)%contenedores_contenedor(j)%nombre)//'">'
                     !botones?
                     if(allocated(self%main_page%contenedores_pag(i)%contenedores_contenedor(j)%botones_contenedor)) then
                         k = 1
@@ -2189,25 +2189,25 @@ contains
         ! Agregar valores al css
         !Empezamos a escribir los contenedores
         do while(i <= self%numero_contenedores)
-            write(unidad, *) '#',self%contenedores_list(i)%nombre,'{'
+            write(unidad, '(A)') '#'//trim(self%contenedores_list(i)%nombre)//'{'
             !posicion?
             if(.not. verificarCampo(self%contenedores_list(i)%posicion1))then
                 write(unidad, '(A)') 'position: absolute;'
-                write(unidad, '(A)') 'left:',self%contenedores_list(i)%posicion1,trim('px;')
+                write(unidad, '(A)') 'left:'//trim(self%contenedores_list(i)%posicion1)//'px;'
                 if(.not. verificarCampo(self%contenedores_list(i)%posicion2))then
-                    write(unidad, '(A)') 'top:',self%contenedores_list(i)%posicion2,trim('px;')
+                    write(unidad, '(A)') 'top:'//trim(self%contenedores_list(i)%posicion2)//'px;'
                 end if
             endif
             !ancho?
-            if(.not. verificarCampo(self%contenedores_list(i)%ancho))write(unidad, '(A)') 'width:',&
-                self%contenedores_list(i)%ancho,'px;'
+            if(.not. verificarCampo(self%contenedores_list(i)%ancho))write(unidad, '(A)') 'width:'&
+                //trim(self%contenedores_list(i)%ancho)//'px;'
             !alto?
-            if(.not. verificarCampo(self%contenedores_list(i)%alto))write(unidad, '(A)') 'height:', &
-                self%contenedores_list(i)%alto,'px;'
+            if(.not. verificarCampo(self%contenedores_list(i)%alto))write(unidad, '(A)') 'height:'&
+                //trim(self%contenedores_list(i)%alto)//'px;'
             !colorFondo?
             if(.not. verificarCampo(self%contenedores_list(i)%color1))then
-                write(unidad, '(A)') 'background-color: rgb(',self%contenedores_list(i)%color1,&
-                    self%contenedores_list(i)%color2,self%contenedores_list(i)%color3,');'
+                write(unidad, '(A)') 'background-color: rgb('//trim(self%contenedores_list(i)%color1)//','&
+                    //trim(self%contenedores_list(i)%color2)//','//trim(self%contenedores_list(i)%color3)//');'
             endif
             write(unidad, *)'font-size: 12px;'
             write(unidad, *)'}'
@@ -2216,25 +2216,25 @@ contains
         i = 1
         !ahora vamos con etiquetas
         do while(i <= self%numero_etiquetas)
-            write(unidad, *) '#',self%etiquetas_list(i)%nombre,'{'
+            write(unidad, *) '#'//trim(self%etiquetas_list(i)%nombre)//'{'
             !posicion?
             if(.not. verificarCampo(self%etiquetas_list(i)%posicion1))then
                 write(unidad, '(A)') 'position: absolute;'
-                write(unidad, '(A)') 'left:',self%etiquetas_list(i)%posicion1,'px;'
+                write(unidad, '(A)') 'left:'//trim(self%etiquetas_list(i)%posicion1)//'px;'
                 if(.not. verificarCampo(self%etiquetas_list(i)%posicion2))then
-                    write(unidad, '(A)') 'top:',self%etiquetas_list(i)%posicion2,'px;'
+                    write(unidad, '(A)') 'top:'//trim(self%etiquetas_list(i)%posicion2)//'px;'
                 end if
             endif
             !ancho?
-            if(.not. verificarCampo(self%etiquetas_list(i)%ancho))write(unidad, '(A)') 'width:', &
-                self%etiquetas_list(i)%ancho,'px;'
+            if(.not. verificarCampo(self%etiquetas_list(i)%ancho))write(unidad, '(A)') 'width:'// &
+                trim(self%etiquetas_list(i)%ancho)//'px;'
             !alto?
-            if(.not. verificarCampo(self%etiquetas_list(i)%alto))write(unidad, '(A)') 'height:',&
-                self%etiquetas_list(i)%alto,'px;'
+            if(.not. verificarCampo(self%etiquetas_list(i)%alto))write(unidad, '(A)') 'height:'//&
+                trim(self%etiquetas_list(i)%alto)//'px;'
             !colorLetra?
             if(.not. verificarCampo(self%etiquetas_list(i)%color1))then
-                write(unidad, '(A)') 'color: rgb(',self%etiquetas_list(i)%color1,&
-                    self%etiquetas_list(i)%color2,self%etiquetas_list(i)%color3,');'
+                write(unidad, '(A)') 'color: rgb('//trim(self%etiquetas_list(i)%color1)//','&
+                    //trim(self%etiquetas_list(i)%color2)//','//trim(self%etiquetas_list(i)%color3)//');'
             endif
             write(unidad, *)'font-size: 12px;'
             write(unidad, *)'}'
@@ -2243,21 +2243,21 @@ contains
         i = 1
         !ahora botones
         do while(i <= self%numero_botones)
-            write(unidad, *) '#',self%botones_list(i)%nombre,'{'
+            write(unidad, *) '#'//trim(self%botones_list(i)%nombre)//'{'
             !posicion?
             if(.not. verificarCampo(self%botones_list(i)%posicion1))then
                 write(unidad, '(A)') 'position: absolute;'
-                write(unidad, '(A)') 'left:',self%botones_list(i)%posicion1,'px;'
+                write(unidad, '(A)') 'left:'//trim(self%botones_list(i)%posicion1)//'px;'
                 if(.not. verificarCampo(self%botones_list(i)%posicion2))then
-                    write(unidad, '(A)') 'top:',self%botones_list(i)%posicion2,'px;'
+                    write(unidad, '(A)') 'top:'//trim(self%botones_list(i)%posicion2)//'px;'
                 end if
             endif
             !ancho?
-            if(.not. verificarCampo(self%botones_list(i)%ancho))write(unidad, '(A)') 'width:', &
-                self%botones_list(i)%ancho,'px;'
+            if(.not. verificarCampo(self%botones_list(i)%ancho))write(unidad, '(A)') 'width:'// &
+                trim(self%botones_list(i)%ancho)//'px;'
             !alto?
-            if(.not. verificarCampo(self%botones_list(i)%alto))write(unidad, '(A)') 'height:', &
-                self%botones_list(i)%alto,'px;'
+            if(.not. verificarCampo(self%botones_list(i)%alto))write(unidad, '(A)') 'height:'// &
+                trim(self%botones_list(i)%alto)//'px;'
             write(unidad, *)'font-size: 12px;'
             write(unidad, *)'}'
             i = i+1
@@ -2265,21 +2265,21 @@ contains
         i = 1
         !textos
         do while(i <= self%numero_textos)
-            write(unidad, *) '#',self%textos_list(i)%nombre,'{'
+            write(unidad, *) '#'//trim(self%textos_list(i)%nombre)//'{'
             !posicion?
             if(.not. verificarCampo(self%textos_list(i)%posicion1))then
                 write(unidad, '(A)') 'position: absolute;'
-                write(unidad, '(A)') 'left:',self%textos_list(i)%posicion1,'px;'
+                write(unidad, '(A)') 'left:'//trim(self%textos_list(i)%posicion1)//'px;'
                 if(.not. verificarCampo(self%textos_list(i)%posicion2))then
-                    write(unidad, '(A)') 'top:',self%textos_list(i)%posicion2,'px;'
+                    write(unidad, '(A)') 'top:'//trim(self%textos_list(i)%posicion2)//'px;'
                 end if
             endif
             !ancho?
-            if(.not. verificarCampo(self%textos_list(i)%ancho))write(unidad, '(A)') 'width:', &
-                self%textos_list(i)%ancho,'px;'
+            if(.not. verificarCampo(self%textos_list(i)%ancho))write(unidad, '(A)') 'width:'// &
+                self%textos_list(i)%ancho//'px;'
             !alto?
-            if(.not. verificarCampo(self%textos_list(i)%alto))write(unidad, '(A)') 'height:', &
-                self%textos_list(i)%alto,'px;'
+            if(.not. verificarCampo(self%textos_list(i)%alto))write(unidad, '(A)') 'height:'//&
+                self%textos_list(i)%alto//'px;'
             write(unidad, *)'font-size: 12px;'
             write(unidad, *)'}'
             i = i+1
@@ -2288,25 +2288,25 @@ contains
         !claves
         
         do while(i <= self%numero_claves)
-            write(unidad, *)  '#',self%claves_list(i)%nombre,'{'
+            write(unidad, *)  '#'//trim(self%claves_list(i)%nombre)//'{'
             !posicion?
             if(.not. verificarCampo(self%claves_list(i)%posicion1))then
                 write(unidad, '(A)') 'position: absolute;'
-                write(unidad, '(A)') 'left:',self%claves_list(i)%posicion1,'px;'
+                write(unidad, '(A)') 'left:'//trim(self%claves_list(i)%posicion1)//'px;'
                 if(.not. verificarCampo(self%claves_list(i)%posicion2))then
-                    write(unidad, '(A)') 'top:',self%claves_list(i)%posicion2,'px;'
+                    write(unidad, '(A)') 'top:'//trim(self%claves_list(i)%posicion2)//'px;'
                 end if
             endif
             !ancho?
-            if(.not. verificarCampo(self%claves_list(i)%ancho))write(unidad, '(A)') 'width:',&
-                self%claves_list(i)%ancho,trim('px;')
+            if(.not. verificarCampo(self%claves_list(i)%ancho))write(unidad, '(A)') 'width:'//&
+                trim(self%claves_list(i)%ancho)//trim('px;')
             !alto?
-            if(.not. verificarCampo(self%claves_list(i)%alto))write(unidad, '(A)') 'height:',&
-                self%claves_list(i)%alto,'px;'
+            if(.not. verificarCampo(self%claves_list(i)%alto))write(unidad, '(A)') 'height:'//&
+                trim(self%claves_list(i)%alto)//'px;'
             !colorLetra?
             if(.not. verificarCampo(self%claves_list(i)%color1))then
-                write(unidad, '(A)') 'color: rgb(',self%claves_list(i)%color1,&
-                    self%claves_list(i)%color2,self%claves_list(i)%color3,');'
+                write(unidad, '(A)') 'color: rgb('//trim(self%claves_list(i)%color1)//','&
+                    //trim(self%claves_list(i)%color2)//','//trim(self%claves_list(i)%color3)//');'
             endif
             write(unidad, *)'font-size: 12px;'
             write(unidad, *)'}'

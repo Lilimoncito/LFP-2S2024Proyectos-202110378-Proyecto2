@@ -1,186 +1,69 @@
- #contlogin                                         {
+#contlogin{
 position: absolute;
-left:
-300                                               
-px;
-top:
-110                                               
-px;
-width:
-270                                               
-px;
-height:
-180                                               
-px;
-background-color: rgb(
-221                                               
-230                                               
-255                                               
-);
+left:300px;
+top:110px;
  font-size: 12px;
  }
- #contFondo                                         {
+#contFondo{
 position: absolute;
-left:
-25                                                
-px;
-top:
-330                                               
-px;
-width:
-800                                               
-px;
-height:
-100                                               
-px;
-background-color: rgb(
-255                                               
-239                                               
-213                                               
-);
+left:25px;
+top:330px;
  font-size: 12px;
  }
- #contlogo2                                         {
+#contlogo2{
 position: absolute;
-left:
-88                                                
-px;
-top:
-25                                                
-px;
-width:
-150                                               
-px;
-height:
-50                                                
-px;
-background-color: rgb(
-255                                               
-218                                               
-185                                               
-);
+left:88px;
+top:25px;
  font-size: 12px;
  }
- #ContLogo1                                         {
+#ContLogo1{
 position: absolute;
-left:
-36                                                
-px;
-top:
-25                                                
-px;
-width:
-50                                                
-px;
-height:
-50                                                
-px;
-background-color: rgb(
-255                                               
-182                                               
-193                                               
-);
+left:36px;
+top:25px;
  font-size: 12px;
  }
- #ContBody                                          {
+#ContBody{
 position: absolute;
-left:
-23                                                
-px;
-top:
-21                                                
-px;
-width:
-800                                               
-px;
-height:
-300                                               
-px;
-background-color: rgb(
-240                                               
-255                                               
-240                                               
-);
+left:23px;
+top:21px;
  font-size: 12px;
  }
- #passw                                             {
+ #passw{
 position: absolute;
-left:
-11                                                
-px;
-top:
-54                                                
-px;
-width:
-53                                                
-px;
-height:
-13                                                
-px;
+left:11px;
+top:54px;
  font-size: 12px;
  }
- #Nombre                                            {
+ #Nombre{
 position: absolute;
-left:
-8                                                 
-px;
-top:
-21                                                
-px;
-width:
-44                                                
-px;
-height:
-13                                                
-px;
+left:8px;
+top:21px;
  font-size: 12px;
  }
- #Carnet                                            {
+ #Carnet{
 position: absolute;
-left:
-8                                                 
-px;
-top:
-75                                                
-px;
-width:
-44                                                
-px;
-height:
-13                                                
-px;
+left:8px;
+top:75px;
  font-size: 12px;
  }
- #cmdIngresar                                       {
+ #cmdIngresar{
 position: absolute;
-left:
-40                                                
-px;
-top:
-130                                               
-px;
+left:40px;
+top:130px;
  font-size: 12px;
  }
- #Texto0                                            {
+ #Texto0{
 position: absolute;
-left:
-65                                                
-px;
-top:
-20                                                
-px;
+left:65px;
+top:20px;
  font-size: 12px;
  }
- #TextoCarnet                                       {
+ #TextoCarnet{
  font-size: 12px;
  }
- #pswClave                                          {
+ #pswClave{
 position: absolute;
-left:
-65                                                
-px;
-top:
-48                                                
-px;
+left:65px;
+top:48px;
  font-size: 12px;
  }

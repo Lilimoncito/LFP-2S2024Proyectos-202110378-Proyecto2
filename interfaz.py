@@ -28,7 +28,7 @@ class Analizador_App:
         self.menu_bar.add_cascade(label="Menu", menu=archivo_menu)
         self.menu_bar.add_command(label = 'Acerca de', command=self.abrir_ventana_texto)
         self.menu_bar.add_command(label = 'Salir', command= self.salir_aplicacion)
-        self.menu_bar.add_command(label = 'Tokens', command= self.salir_aplicacion)
+        self.menu_bar.add_command(label = 'Tokens', command= self.mostrar_errores_en_pestania)
         archivo_menu.add_command(label="Abrir archivo", command=self.abrir_archivo)
         archivo_menu.add_command(label="Guardar", command=self.guardar_archivo)
         archivo_menu.add_command(label="Guardar como", command=self.guardar_como_archivo)
@@ -43,6 +43,17 @@ class Analizador_App:
         self.tree.heading("Tipo", text="Tipo")
         self.tree.heading("Valor", text="Valor")
         self.tree.pack()
+
+        self.frame_tabla_errores = tk.Frame(self.root)
+        
+        # Configurar Treeview para mostrar errores
+        self.tree_errores = ttk.Treeview(self.frame_tabla_errores, columns=("Descripcion", "linea"), show="headings")
+        self.tree_errores.heading("Descripcion", text="Descripcion")
+        self.tree_errores.heading("linea", text="linea")
+        
+        
+        # Inicialmente ocultamos el frame de la tabla de errores
+        self.frame_tabla_errores.pack_forget()
 
         self.filename = None
         self.label_imagen_sat = None
@@ -94,7 +105,31 @@ class Analizador_App:
                 elif line.startswith("valor:"):
                     valor = line.split(":")[1].strip()
                     self.tree.insert("", "end", values=(tipo, valor))
+    def mostrar_errores(self, archivo):
+        # Limpiar la tabla de errores antes de agregar nuevos
+         # Limpiar la tabla antes de agregar nuevos tokens
+        for item in self.tree_errores.get_children():
+            self.tree_errores.delete(item)
 
+
+        # Procesar los tokens
+        with open(archivo, "r") as f:
+            lines = f.readlines()  # Leer todas las líneas del archivo
+            tipo = None
+            for line in lines:
+                if line.startswith("Tipo:"):
+                    tipo = line.split(":")[1].strip()
+                elif line.startswith("linea:"):
+                    valor = line.split(":")[1].strip()
+                    self.tree_errores.insert("", "end", values=(tipo, valor))
+
+    def mostrar_errores_en_pestania(self):
+        # Mostrar solo la tabla de errores al seleccionar "Errores" en el menú
+        self.frame_tabla_errores.pack(pady=10)  # Asegura que el frame sea visible
+        self.tree_errores.pack(side=tk.LEFT, padx=10)
+
+        # Llamar a la función para mostrar errores
+        self.mostrar_errores("listaErrores.txt")
 
     def abrir_archivo(self):
         # Abrir un cuadro de diálogo para seleccionar un archivo .org
@@ -119,11 +154,6 @@ class Analizador_App:
                 f.write(self.cuadro_texto.get("1.0", tk.END))
             self.filename = archivo  # Actualizar el nombre del archivo actual
     
-    
-
-    
-
-
 if __name__ == "__main__":
     root = tk.Tk()
     app = Analizador_App(root)

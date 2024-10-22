@@ -1,0 +1,6 @@
+Tipo:RESERVADA_MAL_REDACTADA                           
+linea:propiedades                                       
+Tipo:RESERVADA_MAL_REDACTADA                           
+linea:propiedades                                       
+Tipo:se esperaba reservada propiedades
+linea:2

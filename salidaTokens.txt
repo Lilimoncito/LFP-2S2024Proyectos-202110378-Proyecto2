@@ -96,8 +96,6 @@ Tipo: GUION
 valor: -                                                 
 Tipo: GUION                                             
 valor: -                                                 
-Tipo: RESERVADA_PROPIEDADES                             
-valor: Propiedades                                       
 Tipo: IDENTIFICADOR                                     
 valor: contlogin                                         
 Tipo: PUNTO                                             
@@ -596,8 +594,6 @@ Tipo: PARENTESIS_CERRADO
 valor: )                                                 
 Tipo: PUNTO_Y_COMA                                      
 valor: ;                                                 
-Tipo: RESERVADA_PROPIEDADES                             
-valor: Propiedades                                       
 Tipo: GUION                                             
 valor: -                                                 
 Tipo: GUION                                             
