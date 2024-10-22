@@ -968,6 +968,8 @@ contains
                     call modoPanico(self, ';')
                     return
                 endif
+                posicion_actual = self%posicion_actual
+                numeroFantasma1 = self%tokens_list(posicion_actual)%valor
                 if(.not. token_match(self,"IDENTIFICADOR"))then 
                     call agregarErrorSintactico(self, "se esperaba identificador",self%posicion_actual)
                     call modoPanico(self, ';')
@@ -2122,9 +2124,9 @@ contains
                     if(allocated(self%main_page%contenedores_pag(i)%contenedores_contenedor(j)%botones_contenedor)) then
                         k = 1
                         do while(k <= self%main_page%contenedores_pag(i)%contenedores_contenedor(j)%num_botones_cont)
-                            write(unidad, *) '<input type = "submit" value = "', &
-                            self%main_page%contenedores_pag(i)%contenedores_contenedor(j)%botones_contenedor(k)%texto &
-                                    ,'" style = "text-align:center"/>'
+                            write(unidad, *) '<input type = "submit" value = "' &
+                            //trim(self%main_page%contenedores_pag(i)%contenedores_contenedor(j)%botones_contenedor(k)%texto)// &
+                                    '" style = "text-align:center"/>'
                             k = k+1
                         end do
                     end if
@@ -2132,9 +2134,9 @@ contains
                     if(allocated(self%main_page%contenedores_pag(i)%contenedores_contenedor(j)%etiquetas_contenedor)) then
                         k = 1
                         do while(k <= self%main_page%contenedores_pag(i)%contenedores_contenedor(j)%num_etiquetas_cont)
-                            write(unidad, *) '<label id = "Nombre">', &
-                            self%main_page%contenedores_pag(i)%contenedores_contenedor(j)%etiquetas_contenedor(k)%nombre &
-                                    ,'</label>'
+                            write(unidad, *) '<label id = "Nombre">'// &
+                            trim(self%main_page%contenedores_pag(i)%contenedores_contenedor(j)%etiquetas_contenedor(k)%nombre) &
+                                    //'</label>'
                             k = k+1
                         end do
                     end if
@@ -2142,9 +2144,9 @@ contains
                     if(allocated(self%main_page%contenedores_pag(i)%contenedores_contenedor(j)%claves_contenedor)) then
                         k = 1
                         do while(k <= self%main_page%contenedores_pag(i)%contenedores_contenedor(j)%num_claves_cont)
-                            write(unidad, *) '<input type = "password" id = "', &
-                            self%main_page%contenedores_pag(i)%contenedores_contenedor(j)%claves_contenedor(k)%nombre &
-                                    ,'" value = "" style = "text-align:left" />'
+                            write(unidad, *) '<input type = "password" id = "'// &
+                            trim(self%main_page%contenedores_pag(i)%contenedores_contenedor(j)%claves_contenedor(k)%nombre) &
+                                    //'" value = "" style = "text-align:left" />'
                             k = k+1
                         end do
                     end if
@@ -2152,9 +2154,9 @@ contains
                     if(allocated(self%main_page%contenedores_pag(i)%contenedores_contenedor(j)%textos_contenedor)) then
                         k = 1
                         do while(k <= self%main_page%contenedores_pag(i)%contenedores_contenedor(j)%num_textos_cont)
-                            write(unidad, *) '<input type = "text" id = "', &
-                            self%main_page%contenedores_pag(i)%contenedores_contenedor(j)%textos_contenedor(k)%nombre &
-                                    ,'"value = "" style = "text-align:left" />'
+                            write(unidad, *) '<input type = "text" id = "'// &
+                            trim(self%main_page%contenedores_pag(i)%contenedores_contenedor(j)%textos_contenedor(k)%nombre) &
+                                    //'"value = "" style = "text-align:left" />'
                             k = k+1
                         end do
                     end if
